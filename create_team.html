@@ -1,0 +1,109 @@
+<html>
+<head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	 <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet"> -->
+ <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+	<meta charset="utf-8">
+	<title>2016上海科技大学羽毛球赛 报名入口!</title>
+</head>
+<body>
+  <style>
+    body{background-image:url(1.jpeg);background-repeat:no-repeat;background-size:cover;} 
+</style>
+   <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">文艺体育部</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./join_pub.html">主页</a></li>
+            <li><a href="./about.html">关于</a></li>
+            <li><a href="./contact.html">联系我们</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="./create_team.html">创建队伍<span class="sr-only">(current)</span></a></li>
+            <li ><a href="./join_pub.html">报名！</a></li>
+            <li ><a href="./wtb.html">主页</a></li>
+            <li><a href="./login.html">后台登陆</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  <script type="text/javascript">
+  function isEmail(strEmail) {
+if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+return true;
+else
+alert("请输入正确的邮箱地址，我们会将比赛信息发送到您的邮箱！");
+}</script>
+
+   <div class="container">
+	<div align="center">
+		<h1 class="form-signin-heading">羽毛球报名入口</h1>
+    <h3 > Complete And Submit !!</h3>
+    <br /><br />
+<input id="name"   style="width:200px;" placeholder="参赛队名" class="form-control">
+
+<br />
+<button type="button" style="width:150px;" class="btn btn-success" onclick="submit_new();">创建队伍</button>
+
+</div>
+</div>
+<script type="text/javascript">
+function submit_new(){
+	
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "user_manipulate.php", false);
+
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+  var name    = document.getElementById("name").value;
+  if (name!=''){
+   alert("创建成功！");
+   window.location.href="./join_pub.html"; 
+    xmlhttp.send("action=new_team&name=" + name);
+  }
+  else{
+   alert("信息存在错误或不完整，请修改后提交!"); 
+  }
+  
+}
+    function get_token(){
+      alert("确认邮件已发送！");
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "email.php", false);
+
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var id   = document.getElementById("id").value;
+  var name    = document.getElementById("name").value;
+  var number  = document.getElementById("number").value;
+  var sex= document.getElementById("sex").value;
+  var sc    = document.getElementById("sc").value;
+  var email    = document.getElementById("email").value;
+  var phone    = document.getElementById("phone").value;
+  xmlhttp.send("action=post_email&id=" + id + "&name=" + name+ "&number=" + number+ "&sex=" + sex+ "&sc=" + sc +"&email=" + email +"&phone=" + phone);
+    }
+</script>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+<footer>
+    
+      </footer>
+</body>
+</html>

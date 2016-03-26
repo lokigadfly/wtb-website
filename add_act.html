@@ -1,0 +1,43 @@
+<?php
+  require './config.php';
+ ?>
+<html>
+<head>
+	<meta charset="utf-8">
+ <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+ <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+  <link href="http://www.minigga.space/css/bootstrap-select.css" rel="stylesheet">
+ <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+	<title>管理员添加活动</title>
+</head>
+<body>
+<div class="container">
+
+      <form class="form-signin" method="POST" action="add_act_auth.php">
+        <h2 class="form-signin-heading">添加活动</h2>
+        <input  type="text" name="name" class="form-control" placeholder="活动名称" required>
+        
+        <input type="text" name="gs" class="form-control" placeholder="私密性" required>
+        <input type="text" name="sc" class="form-control" placeholder="时间" required>
+        <input type="text" name="total" class="form-control" placeholder="人数" required>
+        <input type="text" name="lev" class="form-control" placeholder="等级" required>
+        <input type="text" name="des" class="form-control" placeholder="地点" required>
+        <input type="text" name="detail"  class="form-control" placeholder="详情" required>
+        <br />
+        <select name="category" id="category" class="form-control">
+  <option value ="1001">普通活动</option>
+  <option value ="1002">普通比赛</option>
+  <option value="1003">展览参观</option>
+  <option value="1004">音乐盛会</option>
+  <option value="1005">景点游玩</option>
+  <option value="1006">社团活动</option>
+  <option value="1007">情侣约会</option>
+</select>
+<br />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+      </form>
+
+
+</body>
+</html>

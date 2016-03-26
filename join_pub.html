@@ -1,0 +1,182 @@
+<html>
+<head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	 <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet"> -->
+ <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+	<meta charset="utf-8">
+	<title>2016上海科技大学羽毛球赛 报名入口!</title>
+</head>
+<body>
+  <style>
+    body{background-image:url(1.jpeg);background-repeat:no-repeat;background-size:cover;} 
+</style>
+
+   <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">文艺体育部</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./join_pub.html">主页</a></li>
+            <li><a href="./about.html">关于</a></li>
+            <li><a href="./contact.html">联系我们</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="./create_team.html">创建队伍</a></li>
+            <li class="active"><a href="./join_pub.html">报名！<span class="sr-only">(current)</span></a></li>
+            <li ><a href="./wtb.html">主页</a></li>
+            <li><a href="./login.html">后台登陆</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  <script type="text/javascript">
+  function isEmail(strEmail) {
+if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+return true;
+else
+alert("请输入正确的邮箱地址，我们会将比赛信息发送到您的邮箱！");
+}</script>
+
+   <div class="container">
+	<div align="center">
+		<h1 class="form-signin-heading">羽毛球报名入口</h1>
+    <h3 > Complete And Submit !!</h3>
+
+    
+      <h5><button type="button" style="width:150px;" class="btn btn-warning" onclick="javascript:window.location.href='./create_team.html'">创建队伍</button></h5>
+<h4 style="color:blue">
+      队长请先创建队伍(2-4人组成)，然后依次输入队员信息！</h4>
+    <br /><br />
+   <select name="team" id="team" class="form-control" style="width:200px;">
+    <option selected value="">请选择参赛队伍</option>
+   </select>
+   <h3>  
+<select name="sc" id="sc" class="form-control" style="width:200px;">
+    <option selected value="">请选择所在学院</option>
+    <option value ="物质学院">物质学院</option>
+    <option value ="信息学院">信息学院</option>
+    <option value ="生命学院">生命学院</option>
+   </select>
+<select name="grade" id="grade" class="form-control" style="width:200px;">
+    <option selected value="">请选择所在年级</option>
+    <option value ="2014本科生">2014本科生</option>
+    <option value ="2015本科生">2015本科生</option>
+    <option value ="2013研究生">2013研究生</option>
+    <option value ="2014研究生">2014研究生</option>
+    <option value ="2015研究生">2015研究生</option>
+   </select>
+<input id="name"  style="width:200px;" placeholder="队员姓名" class="form-control">
+<input id="number" style="width:200px;"placeholder="学号" class="form-control">
+<input id="sex"  style="width:200px;" placeholder="性别" class="form-control">
+<input id="email"  style="width:200px;" placeholder="Email" class="form-control" onblur=isEmail(this.value) >
+<input id="phone"  style="width:200px;" placeholder="手机号" class="form-control">
+<br />
+<button type="button" style="width:150px;" class="btn btn-success" onclick="submit_new();">报名</button>
+
+</div>
+</div>
+<script> 
+document.onkeydown=function(event){ 
+  e = event ? event :(window.event ? window.event : null); 
+  if(e.keyCode==13){ 
+    submit_new();
+  } 
+} 
+</script> 
+<script type="text/javascript">
+
+          ajax_get_table();
+          function ajax_get_table(){
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange=function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            render_json(xmlhttp.responseText);
+    }
+  }
+  xmlhttp.open("POST", "user_manipulate.php", true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("action=show_team");
+}
+function render_json(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out = "";
+     for(i = 0; i < arr.length; i++) {
+       out += "<option value ='" +
+        arr[i].user_id +
+        "'>" +
+        arr[i].name +
+        "</option>";
+    }
+    document.getElementById("team").innerHTML = out;
+}
+
+          </script>
+
+<script type="text/javascript">
+function submit_new(){
+	
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "user_manipulate.php", false);
+
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var team   = document.getElementById("team").value;
+  var name    = document.getElementById("name").value;
+  var number  = document.getElementById("number").value;
+  var sex= document.getElementById("sex").value;
+  var sc    = document.getElementById("sc").value;
+  var email    = document.getElementById("email").value;
+  var phone    = document.getElementById("phone").value;
+  var grade    = document.getElementById("grade").value;
+  if ((team!="") && (name!="") && (number!="") && (sex!="") && (sc!="") && (email!="") && (grade!="") && (phone!="") && (team!="") && (isEmail(email))==true){
+   alert("报名成功！");
+    xmlhttp.send("action=new_row&id=" + team + "&name=" + name+ "&number=" + number+ "&sex=" + sex+ "&sc=" + sc +"&email=" + email +"&phone=" + phone+"&grade=" + grade);
+  get_token();
+  }
+  else{
+   alert("信息存在错误或不完整，请修改后提交!"); 
+  }
+  
+}
+    function get_token(){
+      alert("确认邮件已发送！");
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "email.php", false);
+
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var team   = document.getElementById("team").value;
+  var name    = document.getElementById("name").value;
+  var number  = document.getElementById("number").value;
+  var sex= document.getElementById("sex").value;
+  var sc    = document.getElementById("sc").value;
+  var email    = document.getElementById("email").value;
+  var phone    = document.getElementById("phone").value;
+  var grade    = document.getElementById("grade").value;
+  xmlhttp.send("action=new_row&id=" + team + "&name=" + name+ "&number=" + number+ "&sex=" + sex+ "&sc=" + sc +"&email=" + email +"&phone=" + phone+"&grade=" + grade);
+    }
+</script>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+<footer>
+    
+      </footer>
+</body>
+</html>
